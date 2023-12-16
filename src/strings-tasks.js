@@ -193,8 +193,14 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  let res = 0;
+  if (typeof str === 'string') {
+    for (let i = 0; i < str.length; i += 1) {
+      res += str[i].charCodeAt();
+    }
+  }
+  return res;
 }
 
 /**
@@ -208,10 +214,13 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  // if (str.slice(0, substr.length) === substr) {
+  //   return true;
+  // }
+  // return false;
+  return str.startsWith(substr);
 }
-
 /**
  * Checks if a string ends with a specific substring.
  *
@@ -223,8 +232,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -240,8 +249,23 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  // let min;
+  // let sec;
+  // if (minutes <= 9) {
+  //   min = '0'.concat(minutes.toString());
+  // } else {
+  //   min = minutes.toString();
+  // }
+  // if (seconds <= 9) {
+  //   sec = '0'.concat(seconds.toString());
+  // } else {
+  //   sec = seconds.toString();
+  // }
+  // return min.concat(':', sec);
+  const min = minutes.toString().padStart(2, '0');
+  const sec = seconds.toString().padStart(2, '0');
+  return min.concat(':', sec);
 }
 
 /**
@@ -254,8 +278,10 @@ function formatTime(/* minutes, seconds */) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  let temp = str.split('');
+  temp = temp.reverse();
+  return temp.join('');
 }
 
 /**
@@ -269,8 +295,10 @@ function reverseString(/* str */) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  let temp = str.split('');
+  temp = temp.sort();
+  return temp.join('');
 }
 
 /**
