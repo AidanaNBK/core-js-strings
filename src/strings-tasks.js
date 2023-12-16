@@ -521,8 +521,23 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  let res = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (
+      (str[i].charCodeAt(0) >= 65 && str[i].charCodeAt(0) <= 77) ||
+      (str[i].charCodeAt(0) >= 97 && str[i].charCodeAt(0) <= 109)
+    ) {
+      res = res.concat(String.fromCharCode(str[i].charCodeAt(0) + 13));
+    } else if (str[i].charCodeAt(0) >= 78 && str[i].charCodeAt(0) <= 90) {
+      res = res.concat(String.fromCharCode(str[i].charCodeAt(0) - 77 + 64));
+    } else if (str[i].charCodeAt(0) >= 110 && str[i].charCodeAt(0) <= 122) {
+      res = res.concat(String.fromCharCode(str[i].charCodeAt(0) - 109 + 96));
+    } else {
+      res = res.concat(str[i]);
+    }
+  }
+  return res;
 }
 
 /**
@@ -549,8 +564,24 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  let start;
+  if (value[value.length - 1] === '♣') {
+    start = 0;
+  } else if (value[value.length - 1] === '♦') {
+    start = 13;
+  } else if (value[value.length - 1] === '♥') {
+    start = 26;
+  } else {
+    start = 39;
+  }
+  const range = 'A234567891JQK';
+  for (let i = 0; i < range.length; i += 1) {
+    if (value[0] === range[i]) {
+      return i + start;
+    }
+  }
+  return start;
 }
 
 module.exports = {
